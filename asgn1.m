@@ -77,11 +77,18 @@ end
 % will select the lamdba with the least cvMse
 [cvMsemin I] = min(cvMse);
 
+figure(1)
+plot(log(lambdas), cvMse)
+title('MSE (cross-validation) for different \lambda')
+xlabel('log-lambda')
+ylabel('Mean Square Error (Cross Validation)')
+
 %Required Lambda is 
 lambda_opt = lambdas(I);
 b2 = (Xtrain'*Xtrain+lambda_opt*eye(6))\(Xtrain'*ytrain);
 % Calculate the training and test error based on the optimal value of
 % lambda for the Ridge Regression model
+lambda_opt
 trainMseRidge = mean((ytrain - Xtrain*b2).^2)
 testMseRidge = mean((ytest - Xtest*b2).^2)
 
